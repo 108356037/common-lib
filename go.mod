@@ -1,4 +1,4 @@
-module github.com/108356037/v1/common-lib
+module github.com/108356037/common-lib
 
 go 1.16
 
