@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"context"
 	"encoding/base64"
 	"encoding/json"
 	"net/http"
@@ -10,11 +9,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type contextKey string
+// type contextKey string
 
-const (
-	uuidKey contextKey = "uuid"
-)
+// const (
+// 	uuidKey contextKey = "uuid"
+// )
 
 type AccessTokenPayload struct {
 	Exp        float64 `json:"exp"`
@@ -51,7 +50,7 @@ func RetriveDecodedJwt(b64str string) (*AccessTokenPayload, error) {
 	return &payload, nil
 }
 
-func JWTAuthMiddleware() func(c *gin.Context) {
+func JWTAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		jwtPayload := c.Request.Header["Encoded-Jwt"]
 		payload, err := RetriveDecodedJwt(jwtPayload[0])
@@ -63,8 +62,11 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 			c.Abort()
 			return
 		}
-		ctx := context.WithValue(c.Request.Context(), uuidKey, payload.Sub)
-		c.Request = c.Request.WithContext(ctx)
+
+		//ctx := context.WithValue(c.Request.Context(), uuidKey, payload.Sub)
+		//c.Request = c.Request.WithContext(ctx)
+
+		c.Set("uuid", payload.Sub)
 		c.Next()
 	}
 }
