@@ -3,7 +3,10 @@ package middleware
 import (
 	"encoding/base64"
 	"encoding/json"
+	"net/http"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 type AccessTokenPayload struct {
@@ -39,4 +42,22 @@ func RetriveDecodedJwt(b64str string) (*AccessTokenPayload, error) {
 	}
 
 	return &payload, nil
+}
+
+func JWTAuthMiddleware() func(c *gin.Context) {
+	return func(c *gin.Context) {
+		jwtPayload := c.Request.Header["Encoded-Jwt"]
+		payload, err := RetriveDecodedJwt(jwtPayload[0])
+		if err != nil {
+			c.JSON(http.StatusBadRequest, map[string]string{
+				"status": "failed",
+				"info":   err.Error(),
+			})
+			c.Abort()
+			return
+		}
+
+		c.Set("decoded-jwt", payload)
+		c.Next()
+	}
 }
