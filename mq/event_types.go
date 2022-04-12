@@ -10,7 +10,7 @@ type K8sResourceEvent struct {
 	UserId        string `json:"user_id"`
 	ResourceType  string `json:"resource_type"`
 	Action        string `json:"action"`
-	K8sObjectKind string `json:"k8s_obj_kind"`
+	K8sObjectKind string `json:"k8s_obj_kind,omitempty"`
 }
 
 type StrategyEvent struct {
@@ -19,7 +19,8 @@ type StrategyEvent struct {
 	UserId               string                 `json:"user_id"`
 	ResourceType         string                 `json:"resource_type"`
 	Action               string                 `json:"action"`
-	StrategyName         string                 `json:"strategy_name"`
+	StrategyName         string                 `json:"strategy_name,omitempty"`
+	StrategyImage        string                 `json:"image_name,omitempty"`
 	StrategyUpdateDetail map[string]interface{} `json:"update_detail,omitempty"`
 }
 
@@ -28,7 +29,7 @@ type ProductEvent struct {
 	UserId        string `json:"user_id"`
 	ResourceType  string `json:"resource_type"`
 	Action        string `json:"action"`
-	ProductName   string `json:"product_name"`
-	ProductImage  string `json:"image_name"`
+	ProductName   string `json:"product_name,omitempty"`
+	ProductImage  string `json:"image_name,omitempty"`
 	ProductDigest string `json:"image_digest,omitempty"`
 }
