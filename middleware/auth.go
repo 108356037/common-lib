@@ -1,12 +1,19 @@
 package middleware
 
 import (
+	"context"
 	"encoding/base64"
 	"encoding/json"
 	"net/http"
 	"strings"
 
 	"github.com/gin-gonic/gin"
+)
+
+type contextKey string
+
+const (
+	uuidKey contextKey = "uuid"
 )
 
 type AccessTokenPayload struct {
@@ -56,8 +63,8 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 			c.Abort()
 			return
 		}
-
-		c.Set("decoded-jwt", payload)
+		ctx := context.WithValue(c.Request.Context(), uuidKey, payload.Sub)
+		c.Request = c.Request.WithContext(ctx)
 		c.Next()
 	}
 }
