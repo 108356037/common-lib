@@ -21,6 +21,7 @@ type StrategyEvent struct {
 	Action               string                 `json:"action"`
 	StrategyName         string                 `json:"strategy_name,omitempty"`
 	StrategyImage        string                 `json:"image_name,omitempty"`
+	StrategyDeployEnvs   map[string]interface{} `json:"deploy_envs,omitempty"`
 	StrategyUpdateDetail map[string]interface{} `json:"update_detail,omitempty"`
 }
 
