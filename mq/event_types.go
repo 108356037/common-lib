@@ -34,3 +34,13 @@ type ProductEvent struct {
 	ProductImage  string `json:"image_name,omitempty"`
 	ProductDigest string `json:"image_digest,omitempty"`
 }
+
+type PaymentEvent struct {
+	BasicEvent        `json:",inline"`
+	UserId            string `json:"user_id"`
+	Action            string `json:"action"`
+	TransactionStatus string `json:"tx_status,omitempty"`
+	ProductName       string `json:"product_name,omitempty"`
+	ProductImage      string `json:"image_name,omitempty"`
+	ProductDigest     string `json:"image_digest,omitempty"`
+}
