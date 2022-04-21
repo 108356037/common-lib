@@ -30,6 +30,7 @@ type ProductEvent struct {
 	UserId        string `json:"user_id"`
 	ResourceType  string `json:"resource_type"`
 	Action        string `json:"action"`
+	ProductId     string `json:"pid,omitempty"`
 	ProductName   string `json:"product_name,omitempty"`
 	ProductImage  string `json:"image_name,omitempty"`
 	ProductDigest string `json:"image_digest,omitempty"`
@@ -40,6 +41,7 @@ type PaymentEvent struct {
 	UserId            string `json:"user_id"`
 	Action            string `json:"action"`
 	TransactionStatus string `json:"tx_status,omitempty"`
+	ProductId         string `json:"pid,omitempty"`
 	ProductName       string `json:"product_name,omitempty"`
 	ProductImage      string `json:"image_name,omitempty"`
 	ProductDigest     string `json:"image_digest,omitempty"`
