@@ -14,13 +14,13 @@ type K8sResourceEvent struct {
 }
 
 type StrategyEvent struct {
-	BasicEvent `json:",inline"`
-	//EventType          string                 `json:"event_type"`
+	BasicEvent           `json:",inline"`
 	UserId               string                 `json:"user_id"`
 	ResourceType         string                 `json:"resource_type"`
 	Action               string                 `json:"action"`
 	StrategyName         string                 `json:"strategy_name,omitempty"`
 	StrategyImage        string                 `json:"image_name,omitempty"`
+	StrategyType         string                 `json:"strategy_type,omitempty"`
 	StrategyDeployEnvs   map[string]interface{} `json:"deploy_envs,omitempty"`
 	StrategyUpdateDetail map[string]interface{} `json:"update_detail,omitempty"`
 }
@@ -33,6 +33,7 @@ type ProductEvent struct {
 	ProductId     string `json:"pid,omitempty"`
 	ProductName   string `json:"product_name,omitempty"`
 	ProductImage  string `json:"image_name,omitempty"`
+	BotType       string `json:"bot_type,omitempty"`
 	ProductDigest string `json:"image_digest,omitempty"`
 }
 
